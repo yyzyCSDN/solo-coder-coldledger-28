@@ -40,7 +40,7 @@ class TelemetryPolicy:
             end = r.expires_at.astimezone(timezone.utc) if r.expires_at else None
             if start <= x and (end is None or x < end) and r.scope in {"*", scope}:
                 rows.append(r)
-        return sorted(rows, key=lambda r: (-r.priority, r.scope == "*", r.key))
+        return sorted(rows, key=lambda r: (r.priority, r.scope == "*", r.key))
 
     @staticmethod
     def _compare(actual, rule: Rule) -> bool:
